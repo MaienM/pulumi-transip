@@ -15,24 +15,21 @@
 package transip
 
 import (
-	
 	"fmt"
 	"path/filepath"
 	"strings"
 
 	"github.com/ettle/strcase"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv1 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v1"
-	
-	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/aequitas/terraform-provider-transip/provider"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
+
 	"github.com/MaienM/pulumi-transip/provider/pkg/version"
+	"github.com/aequitas/terraform-provider-transip/provider"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 )
-
-
 
 // all of the token components used below.
 const (
@@ -65,12 +62,11 @@ func preConfigureCallback(vars resource.PropertyMap, c shim.ResourceConfig) erro
 	return nil
 }
 
-
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
-// Instantiate the Terraform provider
+	// Instantiate the Terraform provider
 	p := shimv1.NewProvider(provider.Provider())
-		// Create a Pulumi provider mapping
+	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
 		P:    p,
 		Name: "transip",
@@ -96,7 +92,7 @@ func Provider() tfbridge.ProviderInfo {
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
-		Keywords:   []string{
+		Keywords: []string{
 			"pulumi",
 			"transip",
 			"category/cloud",
@@ -106,37 +102,31 @@ func Provider() tfbridge.ProviderInfo {
 		Repository: "https://github.com/MaienM/pulumi-transip",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
-		Version:   version.Version,
-		GitHubOrg: "aequitas",
-		Config:    map[string]*tfbridge.SchemaInfo{
-			// Add any required configuration here, or remove the example below if
-			// no additional points are required.
-			// "region": {
-			// 	Type: tfbridge.MakeType("region", "Region"),
-			// 	Default: &tfbridge.DefaultInfo{
-			// 		EnvVars: []string{"AWS_REGION", "AWS_DEFAULT_REGION"},
-			// 	},
-			// },
-		},
+		Version:              version.Version,
+		GitHubOrg:            "aequitas",
+		Config:               map[string]*tfbridge.SchemaInfo{},
 		PreConfigureCallback: preConfigureCallback,
-		Resources:            map[string]*tfbridge.ResourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi type. Two examples
-			// are below - the single line form is the common case. The multi-line form is
-			// needed only if you wish to override types or other default options.
-			//
-			// "aws_iam_role": {Tok: makeResource(mainMod(mainMod, "aws_iam_role")}
-			//
-			// "aws_acm_certificate": {
-			// 	Tok: Tok: makeResource(mainMod(mainMod, "aws_acm_certificate"),
-			// 	Fields: map[string]*tfbridge.SchemaInfo{
-			// 		"tags": {Type: tfbridge.MakeType("transip", "Tags")},
-			// 	},
-			// },
+		Resources: map[string]*tfbridge.ResourceInfo{
+			"transip_dns_record":                 {Tok: makeResource(mainMod, "transip_dns_record")},
+			"transip_domain":                     {Tok: makeResource(mainMod, "transip_domain")},
+			"transip_domain_dnssec":              {Tok: makeResource(mainMod, "transip_domain_dnssec")},
+			"transip_domain_nameservers":         {Tok: makeResource(mainMod, "transip_domain_nameservers")},
+			"transip_openstack_project":          {Tok: makeResource(mainMod, "transip_openstack_project")},
+			"transip_openstack_user":             {Tok: makeResource(mainMod, "transip_openstack_user")},
+			"transip_private_network":            {Tok: makeResource(mainMod, "transip_private_network")},
+			"transip_private_network_attachment": {Tok: makeResource(mainMod, "transip_private_network_attachment")},
+			"transip_sshkey":                     {Tok: makeResource(mainMod, "transip_sshkey")},
+			"transip_vps":                        {Tok: makeResource(mainMod, "transip_vps")},
+			"transip_vps_firewall":               {Tok: makeResource(mainMod, "transip_vps_firewall")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi function. An example
-			// is below.
-			// "aws_ami": {Tok: makeDataSource(mainMod, "aws_ami")},
+			"transip_domain":            {Tok: makeDataSource(mainMod, "transip_domain")},
+			"transip_domains":           {Tok: makeDataSource(mainMod, "transip_domains")},
+			"transip_openstack_project": {Tok: makeDataSource(mainMod, "transip_openstack_project")},
+			"transip_openstack_user":    {Tok: makeDataSource(mainMod, "transip_openstack_user")},
+			"transip_private_network":   {Tok: makeDataSource(mainMod, "transip_private_network")},
+			"transip_sshkey":            {Tok: makeDataSource(mainMod, "transip_sshkey")},
+			"transip_vps":               {Tok: makeDataSource(mainMod, "transip_vps")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@maienm/pulumi-transip",
@@ -182,7 +172,6 @@ func Provider() tfbridge.ProviderInfo {
 			BasePackage: "com.maienm",
 		},
 	}
-
 
 	prov.SetAutonaming(255, "-")
 

@@ -1,0 +1,1500 @@
+{
+    "name": "transip",
+    "displayName": "TransIP",
+    "description": "A Pulumi package for creating and managing TransIP resources",
+    "keywords": [
+        "pulumi",
+        "transip",
+        "category/cloud"
+    ],
+    "homepage": "https://github.com/MaienM/pulumi-transip",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`transip` Terraform Provider](https://github.com/aequitas/terraform-provider-transip).",
+    "repository": "https://github.com/MaienM/pulumi-transip",
+    "logoUrl": "https://raw.githubusercontent.com/MaienM/pulumi-transip/main/docs/transip.png",
+    "pluginDownloadURL": "github://api.github.com/MaienM/pulumi-transip",
+    "publisher": "MaienM",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "compatibility": "tfbridge20",
+            "namespaces": null,
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "rootNamespace": "MaienM"
+        },
+        "go": {
+            "generateExtraInputTypes": true,
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/MaienM/pulumi-transip/sdk/go/transip"
+        },
+        "java": {
+            "basePackage": "com.maienm",
+            "buildFiles": "",
+            "gradleNexusPublishPluginVersion": ""
+        },
+        "nodejs": {
+            "compatibility": "tfbridge20",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package for creating and managing TransIP resources",
+            "packageName": "@maienm/pulumi-transip",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/aequitas/terraform-provider-transip)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-transip` repo](https://github.com/MaienM/pulumi-transip/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-transip` repo](https://github.com/aequitas/terraform-provider-transip/issues).",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "compatibility": "tfbridge20",
+            "packageName": "pulumi_transip",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/aequitas/terraform-provider-transip)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-transip` repo](https://github.com/MaienM/pulumi-transip/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-transip` repo](https://github.com/aequitas/terraform-provider-transip/issues).",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            }
+        }
+    },
+    "config": {
+        "variables": {
+            "accessToken": {
+                "type": "string",
+                "description": "Temporary access token used for authentication.\n"
+            },
+            "accountName": {
+                "type": "string",
+                "description": "Name of the Transip account.\n"
+            },
+            "privateKey": {
+                "type": "string",
+                "description": "Contents of the private key file to be used to authenticate.\n"
+            },
+            "readOnly": {
+                "type": "boolean",
+                "description": "Disable API write calls.\n"
+            },
+            "testMode": {
+                "type": "boolean",
+                "description": "Use API test mode.\n"
+            }
+        },
+        "defaults": [
+            "accountName"
+        ]
+    },
+    "types": {
+        "transip:index/DomainDnssecDnssec:DomainDnssecDnssec": {
+            "properties": {
+                "algorithm": {
+                    "type": "integer"
+                },
+                "flags": {
+                    "type": "integer"
+                },
+                "keyTag": {
+                    "type": "integer"
+                },
+                "publicKey": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "algorithm",
+                "flags",
+                "keyTag",
+                "publicKey"
+            ]
+        },
+        "transip:index/DomainNameserversNameserver:DomainNameserversNameserver": {
+            "properties": {
+                "hostname": {
+                    "type": "string"
+                },
+                "ipv4": {
+                    "type": "string"
+                },
+                "ipv6": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "hostname"
+            ]
+        },
+        "transip:index/VpsFirewallInboundRule:VpsFirewallInboundRule": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "port": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "protocol": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "whitelists": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "willReplaceOnChanges": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "description",
+                "port"
+            ]
+        }
+    },
+    "provider": {
+        "description": "The provider type for the transip package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "accessToken": {
+                "type": "string",
+                "description": "Temporary access token used for authentication.\n"
+            },
+            "accountName": {
+                "type": "string",
+                "description": "Name of the Transip account.\n"
+            },
+            "privateKey": {
+                "type": "string",
+                "description": "Contents of the private key file to be used to authenticate.\n"
+            },
+            "readOnly": {
+                "type": "boolean",
+                "description": "Disable API write calls.\n"
+            },
+            "testMode": {
+                "type": "boolean",
+                "description": "Use API test mode.\n"
+            }
+        },
+        "required": [
+            "accountName"
+        ],
+        "inputProperties": {
+            "accessToken": {
+                "type": "string",
+                "description": "Temporary access token used for authentication.\n"
+            },
+            "accountName": {
+                "type": "string",
+                "description": "Name of the Transip account.\n"
+            },
+            "privateKey": {
+                "type": "string",
+                "description": "Contents of the private key file to be used to authenticate.\n"
+            },
+            "readOnly": {
+                "type": "boolean",
+                "description": "Disable API write calls.\n"
+            },
+            "testMode": {
+                "type": "boolean",
+                "description": "Use API test mode.\n"
+            }
+        },
+        "requiredInputs": [
+            "accountName"
+        ]
+    },
+    "resources": {
+        "transip:index/dnsRecord:DnsRecord": {
+            "properties": {
+                "contents": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The content of of the dns entry, for example '10 mail', '127.0.0.1' or 'www'.\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "The name, including the tld of the domain.\n"
+                },
+                "expire": {
+                    "type": "integer",
+                    "description": "The expiration period of the dns entry, in seconds. For example 86400 for a day of expiration.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the dns entry, for example '@' or 'www'.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of dns entry. Possbible types are 'A', 'AAAA', 'CAA', 'CNAME', 'MX', 'NS', 'TXT', 'SRV', 'SSHFP' and 'TLSA'.\n"
+                }
+            },
+            "required": [
+                "contents",
+                "domain",
+                "name",
+                "type"
+            ],
+            "inputProperties": {
+                "contents": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The content of of the dns entry, for example '10 mail', '127.0.0.1' or 'www'.\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "The name, including the tld of the domain.\n",
+                    "willReplaceOnChanges": true
+                },
+                "expire": {
+                    "type": "integer",
+                    "description": "The expiration period of the dns entry, in seconds. For example 86400 for a day of expiration.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the dns entry, for example '@' or 'www'.\n",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of dns entry. Possbible types are 'A', 'AAAA', 'CAA', 'CNAME', 'MX', 'NS', 'TXT', 'SRV', 'SSHFP' and 'TLSA'.\n"
+                }
+            },
+            "requiredInputs": [
+                "contents",
+                "domain",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DnsRecord resources.\n",
+                "properties": {
+                    "contents": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The content of of the dns entry, for example '10 mail', '127.0.0.1' or 'www'.\n"
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "The name, including the tld of the domain.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "expire": {
+                        "type": "integer",
+                        "description": "The expiration period of the dns entry, in seconds. For example 86400 for a day of expiration.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the dns entry, for example '@' or 'www'.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The type of dns entry. Possbible types are 'A', 'AAAA', 'CAA', 'CNAME', 'MX', 'NS', 'TXT', 'SRV', 'SSHFP' and 'TLSA'.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "transip:index/domain:Domain": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name, including the tld of this domain\n"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name, including the tld of this domain\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Domain resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name, including the tld of this domain\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "transip:index/domainDnssec:DomainDnssec": {
+            "properties": {
+                "dnssecs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/transip:index/DomainDnssecDnssec:DomainDnssecDnssec"
+                    },
+                    "description": "List of dnssec entries associated with domain\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "The domain, including the tld\n"
+                }
+            },
+            "required": [
+                "dnssecs",
+                "domain"
+            ],
+            "inputProperties": {
+                "dnssecs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/transip:index/DomainDnssecDnssec:DomainDnssecDnssec"
+                    },
+                    "description": "List of dnssec entries associated with domain\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "The domain, including the tld\n"
+                }
+            },
+            "requiredInputs": [
+                "dnssecs",
+                "domain"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DomainDnssec resources.\n",
+                "properties": {
+                    "dnssecs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/transip:index/DomainDnssecDnssec:DomainDnssecDnssec"
+                        },
+                        "description": "List of dnssec entries associated with domain\n"
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "The domain, including the tld\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "transip:index/domainNameservers:DomainNameservers": {
+            "properties": {
+                "domain": {
+                    "type": "string",
+                    "description": "The domain, including the tld\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/transip:index/DomainNameserversNameserver:DomainNameserversNameserver"
+                    },
+                    "description": "List of nameservers associated with domain\n"
+                }
+            },
+            "required": [
+                "domain",
+                "nameservers"
+            ],
+            "inputProperties": {
+                "domain": {
+                    "type": "string",
+                    "description": "The domain, including the tld\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/transip:index/DomainNameserversNameserver:DomainNameserversNameserver"
+                    },
+                    "description": "List of nameservers associated with domain\n"
+                }
+            },
+            "requiredInputs": [
+                "domain",
+                "nameservers"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DomainNameservers resources.\n",
+                "properties": {
+                    "domain": {
+                        "type": "string",
+                        "description": "The domain, including the tld\n"
+                    },
+                    "nameservers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/transip:index/DomainNameserversNameserver:DomainNameserversNameserver"
+                        },
+                        "description": "List of nameservers associated with domain\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "transip:index/openstackProject:OpenstackProject": {
+            "properties": {
+                "blocked": {
+                    "type": "boolean",
+                    "description": "Set to true when a project has been administratively blocked\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Describes this project\n"
+                },
+                "locked": {
+                    "type": "boolean",
+                    "description": "Set to true when an ongoing process blocks the project from being modified\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Project name\n"
+                }
+            },
+            "required": [
+                "blocked",
+                "locked",
+                "name"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "Describes this project\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Project name\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering OpenstackProject resources.\n",
+                "properties": {
+                    "blocked": {
+                        "type": "boolean",
+                        "description": "Set to true when a project has been administratively blocked\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Describes this project\n"
+                    },
+                    "locked": {
+                        "type": "boolean",
+                        "description": "Set to true when an ongoing process blocks the project from being modified\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Project name\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "transip:index/openstackUser:OpenstackUser": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "Description\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Email address\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Password\n"
+                },
+                "projectid": {
+                    "type": "string",
+                    "description": "Grant user access to a project\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "Username\n"
+                }
+            },
+            "required": [
+                "email",
+                "password",
+                "projectid",
+                "username"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "Description\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Email address\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Password\n"
+                },
+                "projectid": {
+                    "type": "string",
+                    "description": "Grant user access to a project\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "Username\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "email",
+                "password",
+                "projectid",
+                "username"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering OpenstackUser resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "Description\n"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "Email address\n"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "Password\n"
+                    },
+                    "projectid": {
+                        "type": "string",
+                        "description": "Grant user access to a project\n"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "Username\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "transip:index/privateNetwork:PrivateNetwork": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The custom name that can be set by customer.\n"
+                },
+                "isBlocked": {
+                    "type": "string",
+                    "description": "If the Private Network is administratively blocked.\n"
+                },
+                "isLocked": {
+                    "type": "string",
+                    "description": "When locked, another process is already working with this private network.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The unique private network name\n"
+                },
+                "vpsNames": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The VPSes in this private network.\n"
+                }
+            },
+            "required": [
+                "description",
+                "isBlocked",
+                "isLocked",
+                "name",
+                "vpsNames"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The custom name that can be set by customer.\n"
+                }
+            },
+            "requiredInputs": [
+                "description"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering PrivateNetwork resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The custom name that can be set by customer.\n"
+                    },
+                    "isBlocked": {
+                        "type": "string",
+                        "description": "If the Private Network is administratively blocked.\n"
+                    },
+                    "isLocked": {
+                        "type": "string",
+                        "description": "When locked, another process is already working with this private network.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The unique private network name\n"
+                    },
+                    "vpsNames": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The VPSes in this private network.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "transip:index/privateNetworkAttachment:PrivateNetworkAttachment": {
+            "properties": {
+                "privateNetworkId": {
+                    "type": "string",
+                    "description": "Name of the Private Network.\n"
+                },
+                "vpsId": {
+                    "type": "string",
+                    "description": "VPN name the Private Network is attached to.\n"
+                }
+            },
+            "required": [
+                "privateNetworkId",
+                "vpsId"
+            ],
+            "inputProperties": {
+                "privateNetworkId": {
+                    "type": "string",
+                    "description": "Name of the Private Network.\n",
+                    "willReplaceOnChanges": true
+                },
+                "vpsId": {
+                    "type": "string",
+                    "description": "VPN name the Private Network is attached to.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "privateNetworkId",
+                "vpsId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering PrivateNetworkAttachment resources.\n",
+                "properties": {
+                    "privateNetworkId": {
+                        "type": "string",
+                        "description": "Name of the Private Network.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vpsId": {
+                        "type": "string",
+                        "description": "VPN name the Private Network is attached to.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "transip:index/sshkey:Sshkey": {
+            "properties": {
+                "creationDate": {
+                    "type": "string",
+                    "description": "Creation date of the SSH key.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The name that can be set by customer.\n"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "The public part of the SSH key.\n"
+                },
+                "md5Fingerprint": {
+                    "type": "string",
+                    "description": "SSH key fingerprint.\n"
+                }
+            },
+            "required": [
+                "creationDate",
+                "description",
+                "key",
+                "md5Fingerprint"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The name that can be set by customer.\n",
+                    "willReplaceOnChanges": true
+                },
+                "key": {
+                    "type": "string",
+                    "description": "The public part of the SSH key.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "description",
+                "key"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Sshkey resources.\n",
+                "properties": {
+                    "creationDate": {
+                        "type": "string",
+                        "description": "Creation date of the SSH key.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The name that can be set by customer.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "key": {
+                        "type": "string",
+                        "description": "The public part of the SSH key.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "md5Fingerprint": {
+                        "type": "string",
+                        "description": "SSH key fingerprint.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "transip:index/vps:Vps": {
+            "properties": {
+                "availabilityZone": {
+                    "type": "string",
+                    "description": "The name of the availability zone the VPS is in.\n"
+                },
+                "cpus": {
+                    "type": "integer",
+                    "description": "The VPS cpu count.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The name that can be set by customer.\n"
+                },
+                "diskSize": {
+                    "type": "integer",
+                    "description": "The VPS disk size in kB.\n"
+                },
+                "installFlavour": {
+                    "type": "string",
+                    "description": "The flavour of OS installation: 'installer', 'preinstallable' or 'cloudinit'.\n"
+                },
+                "installText": {
+                    "type": "string",
+                    "description": "Base64 encoded preseed / kickstart / cloudinit instructions, when installing unattended.\n"
+                },
+                "ipAddress": {
+                    "type": "string",
+                    "description": "The VPS main ipAddress.\n"
+                },
+                "ipv4Addresses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "All IPV4 addresses associated with this VPS.\n"
+                },
+                "ipv6Addresses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "All IPV6 addresses associated with this VPS.\n"
+                },
+                "isBlocked": {
+                    "type": "boolean",
+                    "description": "If the VPS is administratively blocked.\n"
+                },
+                "isCustomerLocked": {
+                    "type": "boolean",
+                    "description": "If this VPS is locked by the customer.\n"
+                },
+                "macAddress": {
+                    "type": "string",
+                    "description": "The VPS macaddress.\n"
+                },
+                "memorySize": {
+                    "type": "integer",
+                    "description": "The VPS memory size in kB.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The unique VPS name.\n"
+                },
+                "operatingSystem": {
+                    "type": "string",
+                    "description": "The VPS OperatingSystem.\n"
+                },
+                "productName": {
+                    "type": "string",
+                    "description": "The product name.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "The VPS status, either 'created', 'installing', 'running', 'stopped' or 'paused'.\n"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The custom tags added to this VPS.\n"
+                }
+            },
+            "required": [
+                "cpus",
+                "diskSize",
+                "ipAddress",
+                "ipv4Addresses",
+                "ipv6Addresses",
+                "isBlocked",
+                "isCustomerLocked",
+                "macAddress",
+                "memorySize",
+                "name",
+                "operatingSystem",
+                "productName",
+                "status",
+                "tags"
+            ],
+            "inputProperties": {
+                "availabilityZone": {
+                    "type": "string",
+                    "description": "The name of the availability zone the VPS is in.\n",
+                    "willReplaceOnChanges": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The name that can be set by customer.\n",
+                    "willReplaceOnChanges": true
+                },
+                "installFlavour": {
+                    "type": "string",
+                    "description": "The flavour of OS installation: 'installer', 'preinstallable' or 'cloudinit'.\n",
+                    "willReplaceOnChanges": true
+                },
+                "installText": {
+                    "type": "string",
+                    "description": "Base64 encoded preseed / kickstart / cloudinit instructions, when installing unattended.\n",
+                    "willReplaceOnChanges": true
+                },
+                "operatingSystem": {
+                    "type": "string",
+                    "description": "The VPS OperatingSystem.\n",
+                    "willReplaceOnChanges": true
+                },
+                "productName": {
+                    "type": "string",
+                    "description": "The product name.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "operatingSystem",
+                "productName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Vps resources.\n",
+                "properties": {
+                    "availabilityZone": {
+                        "type": "string",
+                        "description": "The name of the availability zone the VPS is in.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "cpus": {
+                        "type": "integer",
+                        "description": "The VPS cpu count.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The name that can be set by customer.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "diskSize": {
+                        "type": "integer",
+                        "description": "The VPS disk size in kB.\n"
+                    },
+                    "installFlavour": {
+                        "type": "string",
+                        "description": "The flavour of OS installation: 'installer', 'preinstallable' or 'cloudinit'.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "installText": {
+                        "type": "string",
+                        "description": "Base64 encoded preseed / kickstart / cloudinit instructions, when installing unattended.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipAddress": {
+                        "type": "string",
+                        "description": "The VPS main ipAddress.\n"
+                    },
+                    "ipv4Addresses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "All IPV4 addresses associated with this VPS.\n"
+                    },
+                    "ipv6Addresses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "All IPV6 addresses associated with this VPS.\n"
+                    },
+                    "isBlocked": {
+                        "type": "boolean",
+                        "description": "If the VPS is administratively blocked.\n"
+                    },
+                    "isCustomerLocked": {
+                        "type": "boolean",
+                        "description": "If this VPS is locked by the customer.\n"
+                    },
+                    "macAddress": {
+                        "type": "string",
+                        "description": "The VPS macaddress.\n"
+                    },
+                    "memorySize": {
+                        "type": "integer",
+                        "description": "The VPS memory size in kB.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The unique VPS name.\n"
+                    },
+                    "operatingSystem": {
+                        "type": "string",
+                        "description": "The VPS OperatingSystem.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "productName": {
+                        "type": "string",
+                        "description": "The product name.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "The VPS status, either 'created', 'installing', 'running', 'stopped' or 'paused'.\n"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The custom tags added to this VPS.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "transip:index/vpsFirewall:VpsFirewall": {
+            "properties": {
+                "inboundRules": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/transip:index/VpsFirewallInboundRule:VpsFirewallInboundRule"
+                    },
+                    "description": "Firewall rules\n"
+                },
+                "isEnabled": {
+                    "type": "boolean",
+                    "description": "Whether the firewall is enabled for this VPS\n"
+                },
+                "vpsName": {
+                    "type": "string",
+                    "description": "Name of the VPS\n"
+                }
+            },
+            "required": [
+                "vpsName"
+            ],
+            "inputProperties": {
+                "inboundRules": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/transip:index/VpsFirewallInboundRule:VpsFirewallInboundRule"
+                    },
+                    "description": "Firewall rules\n",
+                    "willReplaceOnChanges": true
+                },
+                "isEnabled": {
+                    "type": "boolean",
+                    "description": "Whether the firewall is enabled for this VPS\n",
+                    "willReplaceOnChanges": true
+                },
+                "vpsName": {
+                    "type": "string",
+                    "description": "Name of the VPS\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "vpsName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering VpsFirewall resources.\n",
+                "properties": {
+                    "inboundRules": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/transip:index/VpsFirewallInboundRule:VpsFirewallInboundRule"
+                        },
+                        "description": "Firewall rules\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "isEnabled": {
+                        "type": "boolean",
+                        "description": "Whether the firewall is enabled for this VPS\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "vpsName": {
+                        "type": "string",
+                        "description": "Name of the VPS\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "transip:index/getDomain:getDomain": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getDomain.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name, including the tld of this domain.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getDomain.\n",
+                "properties": {
+                    "authcode": {
+                        "type": "string",
+                        "description": "The authcode for this domain as generated by the registry.\n"
+                    },
+                    "cancellationDate": {
+                        "type": "string",
+                        "description": "Cancellation data, in YYYY-mm-dd h:i:s format, null if the domain is active.\n"
+                    },
+                    "cancellationStatus": {
+                        "type": "string",
+                        "description": "Cancellation status, null if the domain is active, 'cancelled' when the domain is cancelled.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "isDnsOnly": {
+                        "type": "boolean",
+                        "description": "Whether this domain is DNS only.\n"
+                    },
+                    "isTransferLocked": {
+                        "type": "boolean",
+                        "description": "If this domain supports transfer locking, this flag is true when the domains ability to transfer is locked at the registry.\n"
+                    },
+                    "isWhitelabel": {
+                        "type": "boolean",
+                        "description": "If this domain is added to your whitelabel.\n"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "nameservers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "$ref": "pulumi.json#/Any"
+                            }
+                        },
+                        "description": "List of nameservers associated with domain.\n"
+                    },
+                    "registrationDate": {
+                        "type": "string",
+                        "description": "Registration date of the domain, in YYYY-mm-dd format.\n"
+                    },
+                    "renewalDate": {
+                        "type": "string",
+                        "description": "Next renewal date of the domain, in YYYY-mm-dd format.\n"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The custom tags added to this domain.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "authcode",
+                    "cancellationDate",
+                    "cancellationStatus",
+                    "isDnsOnly",
+                    "isTransferLocked",
+                    "isWhitelabel",
+                    "name",
+                    "nameservers",
+                    "registrationDate",
+                    "renewalDate",
+                    "tags",
+                    "id"
+                ]
+            }
+        },
+        "transip:index/getDomains:getDomains": {
+            "outputs": {
+                "description": "A collection of values returned by getDomains.\n",
+                "properties": {
+                    "domains": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "domains",
+                    "id"
+                ]
+            }
+        },
+        "transip:index/getOpenstackProject:getOpenstackProject": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getOpenstackProject.\n",
+                "properties": {
+                    "blocked": {
+                        "type": "boolean"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "locked": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getOpenstackProject.\n",
+                "properties": {
+                    "blocked": {
+                        "type": "boolean"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "locked": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "id"
+                ]
+            }
+        },
+        "transip:index/getOpenstackUser:getOpenstackUser": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getOpenstackUser.\n",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "username"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getOpenstackUser.\n",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "username",
+                    "id"
+                ]
+            }
+        },
+        "transip:index/getPrivateNetwork:getPrivateNetwork": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getPrivateNetwork.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The unique private network name\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getPrivateNetwork.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The custom name that can be set by customer.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "isBlocked": {
+                        "type": "string",
+                        "description": "If the Private Network is administratively blocked.\n"
+                    },
+                    "isLocked": {
+                        "type": "string",
+                        "description": "When locked, another process is already working with this privatenetwork.\n"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "vpsNames": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The VPSes in this private network.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "description",
+                    "isBlocked",
+                    "isLocked",
+                    "name",
+                    "vpsNames",
+                    "id"
+                ]
+            }
+        },
+        "transip:index/getSshkey:getSshkey": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getSshkey.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The name that can be set by customer.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of the SSH key.\n"
+                    },
+                    "key": {
+                        "type": "string",
+                        "description": "The public part of the SSH key.\n"
+                    },
+                    "md5Fingerprint": {
+                        "type": "string",
+                        "description": "SSH key fingerprint.\n"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getSshkey.\n",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "key": {
+                        "type": "string"
+                    },
+                    "md5Fingerprint": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "transip:index/getVps:getVps": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getVps.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The unique VPS name.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getVps.\n",
+                "properties": {
+                    "availabilityZone": {
+                        "type": "string",
+                        "description": "The name of the availability zone the VPS is in.\n"
+                    },
+                    "cpus": {
+                        "type": "integer",
+                        "description": "The VPS cpu count.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The name that can be set by customer.\n"
+                    },
+                    "diskSize": {
+                        "type": "integer",
+                        "description": "The VPS disk size in kB.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "ipAddress": {
+                        "type": "string",
+                        "description": "The VPS main ipAddress.\n"
+                    },
+                    "ipv4Addresses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "All IPV4 addresses associated with this VPS.\n"
+                    },
+                    "ipv6Addresses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "All IPV6 addresses associated with this VPS.\n"
+                    },
+                    "isBlocked": {
+                        "type": "boolean",
+                        "description": "If the VPS is administratively blocked.\n"
+                    },
+                    "isCustomerLocked": {
+                        "type": "boolean",
+                        "description": "If this VPS is locked by the customer.\n"
+                    },
+                    "isLocked": {
+                        "type": "boolean",
+                        "description": "Whether or not another process is already doing stuff with this VPS.\n"
+                    },
+                    "macAddress": {
+                        "type": "string",
+                        "description": "The VPS macaddress.\n"
+                    },
+                    "memorySize": {
+                        "type": "integer",
+                        "description": "The VPS memory size in kB.\n"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "operatingSystem": {
+                        "type": "string",
+                        "description": "The VPS OperatingSystem.\n"
+                    },
+                    "productName": {
+                        "type": "string",
+                        "description": "The product name.\n"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "The VPS status, either 'created', 'installing', 'running', 'stopped' or 'paused'.\n"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The custom tags added to this VPS.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "availabilityZone",
+                    "cpus",
+                    "description",
+                    "diskSize",
+                    "ipAddress",
+                    "ipv4Addresses",
+                    "ipv6Addresses",
+                    "isBlocked",
+                    "isCustomerLocked",
+                    "isLocked",
+                    "macAddress",
+                    "memorySize",
+                    "name",
+                    "operatingSystem",
+                    "productName",
+                    "status",
+                    "tags",
+                    "id"
+                ]
+            }
+        }
+    }
+}

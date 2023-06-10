@@ -3,6 +3,7 @@ module github.com/MaienM/pulumi-transip/provider
 go 1.19
 
 replace (
+	github.com/aequitas/terraform-provider-transip => github.com/maienm/terraform-provider-transip v0.1.1019
 	github.com/spf13/afero => github.com/spf13/afero v1.2.2
 )
 
