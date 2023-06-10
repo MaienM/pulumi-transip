@@ -1,3 +1,5 @@
+## This uses a _fork_ of the transip provider that's in the Terraform registry with some additions. Use at your own risk, backwards compatibility is not guaranteed.
+
 # Transip Resource Provider
 
 The Transip Resource Provider lets you manage [transip](https://www.pulumi.com/registry/packages/transip/) resources.
