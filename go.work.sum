@@ -1,0 +1,6 @@
+github.com/aequitas/terraform-provider-transip v0.1.19 h1:RR5F7reekIrNWuMlCaLNb1uQCKFfstsEmKx/qGZlP5U=
+github.com/aequitas/terraform-provider-transip v0.1.19/go.mod h1:rEvfR+2ntVi/AOLVV2q/S+b17pQWcgHLHp2/nFIAK9k=
+github.com/apparentlymart/go-textseg v1.0.0 h1:rRmlIsPEEhUTIKQb7T++Nz/A5Q6C9IuX2wFoYVvnCs0=
+github.com/cenkalti/backoff v2.2.1+incompatible h1:tNowT99t7UNflLxfYYSlKYsBpXdEet03Pg2g16Swow4=
+github.com/hashicorp/terraform-plugin-test v1.2.0 h1:AWFdqyfnOj04sxTdaAF57QqvW7XXrT8PseUHkbKsE8I=
+gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
